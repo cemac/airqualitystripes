@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- html start: __________________________________________________________ -->
+<html>
+  <!-- head start:_________________________________________________________ -->
+  <head>
+    <meta http-equiv="content-type"
+          content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1">
+    <link rel="icon"
+          href="../img/icon/icon.png"
+          sizes="192x192">
+    <!-- title: ___________________________________________________________ -->
+    <title>AQ stripes - About the data</title>
+    <!-- styles: __________________________________________________________ -->
+    <link rel="stylesheet"
+          type="text/css"
+          href="../css/site.css"
+          media="all">
+    <!-- scripts: _________________________________________________________ -->
+    <script src="../js/site.js"
+            charset="utf-8"
+            defer>
+    </script>
+  <!-- head end:___________________________________________________________ -->
+  </head>
+  <!-- body start: ________________________________________________________ -->
+  <body>
+    <!-- container start: _________________________________________________ -->
+    <div id="container"
+         class="container column">
+      <!-- header: ________________________________________________________ -->
+      <div id="header"
+           class="header row flex_start flex_no_grow">
+        <div id="header_text"
+             class="header_text">
+          <a href="/">AQ stripes</a>
+        </div>
+      </div>
+      <!-- content: _______________________________________________________ -->
+      <div id="content"
+            class="content row">
+        <!-- controls: ____________________________________________________ -->
+        <div id="content_control"
+             class="content_control">
+          <div id="content_control_close"
+             class="content_control_close row flex_end">
+            <a id="content_control_close_click"
+               href="javascript:void(0)"
+               class="content_control_close"
+               onclick="content_control_toggle()">&times;</a>
+          </div>
+          <div id="stripes_control"
+               class="control_section">
+            <p id="stripes_control_header"
+                class="control_header"><a href="../">Stripes</a></p>
+          </div>
+          <div id="faq_control"
+               class="control_section">
+            <p id="faq_control_header"
+                class="control_header"><a href="../faq/">FAQ</a></p>
+          </div>
+          <div id="about_control"
+               class="control_section">
+            <p id="about_control_header"
+                class="control_header_active">About the data</p>
+          </div>
+          <div id="contact_control"
+               class="control_section">
+            <p id="contact_control_header"
+                class="control_header"><a href="../contact/">Get in touch</a></p>
+          </div>
+          <div id="ack_control"
+               class="control_section">
+            <p id="ack_control_header"
+                class="control_header"><a href="../acknowledgements/">Acknowledgements</a></p>
+          </div>
+        </div>
+        <!-- dashboard: ___________________________________________________ -->
+        <div id="content_content"
+             class="content_content column">
+          <div id="content_control_menu"
+             class="content_control_menu row flex_start">
+            <img id="content_control_menu_img"
+                 class="content_control_menu_img"
+                 src="../img/control/menu.png"
+                  onclick="content_control_toggle()">
+          </div>
+          <div id="content_container"
+               class="content_text_container column flex_start">
+            <h3>About the data</h3>
+            <div>
+              <p>This website shows the concentration of particulate matter air pollution (PM2.5) in cities around the world.  Very few historical observations of PM2.5 exist before the year 2000 so instead we use data produced from a mix of computer model simulations and satellite observations.</p>
+              <p>For the most recent years (1998-2021) we use a dataset that combines ground-level and satellite observations of PM2.5 concentrations (from <a href="https://pubs.acs.org/doi/10.1021/acs.est.1c05309" target="_new">Van Donkelaar et at (2021)</a>, satellite dataset can be found here).  Satellite observations of PM2.5 aren’t available for the years before 1998, so instead we take the historical trend in air pollution from computer models (<a href="https://doi.org/10.5194/acp-20-14547-2020" target="_new">Turnock 2020</a>); publicly available model data was taken from the <a href="https://wcrp-cmip.org/" target="_new">Coupled Model Intercomparison Project (CMIP6)</a>, these are the climate models used for the IPCC assessment report.  We used data from the <a href="https://esgf-index1.ceda.ac.uk/projects/cmip6-ceda/" target-"_new">UKESM submission to CMIP</a> (data is <a href="http://cera-www.dkrz.de/WDCC/meta/CMIP6/CMIP6.CMIP.MOHC.UKESM1-0-LL" target="_new">here</a>).</p>
+              <p>To ensure a smooth time series, we don’t use the model concentrations directly, instead we use them to calculate the historical trend for each city and apply this trend to a three-year average of the observations from 1998-2000. This is a similar approach to that taken by <a href="https://doi.org/10.1029/2023GH000812" target="_new">Turnock et al. (2023)</a> and <a href="https://doi.org/10.1029/2023EF003697" target="_new">Reddington et al. (2023)</a>.</p>
+            </div>
+            <div>
+              <h4>References</h4>
+              <p><em>Turnock, S. T., Allen, R. J., Andrews, M., Bauer, S. E., Deushi, M., Emmons, L., Good, P., Horowitz, L., John, J. G., Michou, M., Nabat, P., Naik, V., Neubauer, D., O'Connor, F. M., Olivié, D., Oshima, N., Schulz, M., Sellar, A., Shim, S., Takemura, T., Tilmes, S., Tsigaridis, K., Wu, T., and Zhang, J</em>. (2020). Historical and future changes in air pollutants from CMIP6 models, Atmos. Chem. Phys., 20, 14547–14579, doi: <a href="https://doi.org/10.5194/acp-20-14547-2020" target="_new">10.5194/acp-20-14547-2020</a></p>
+              <p><em>Van Donkelaar, A., Melanie S. Hammer, Liam Bindle, Michael Brauer, Jeffery R. Brook, Michael J. Garay, N. Christina Hsu, Olga V. Kalashnikova, Ralph A. Kahn, Colin Lee, Robert C. Levy, Alexei Lyapustin, Andrew M. Sayer and Randall V. Martin</em> (2021). Monthly Global Estimates of Fine Particulate Matter and Their Uncertainty, Environmental Science & Technology, 55, 22, 15287–15300, doi: <a href="https://doi.org/10.1021/acs.est.1c05309" target="_new">10.1021/acs.est.1c05309</a></p>
+              <p><em>Turnock, S. T., Reddington, C. L., West, J. J., & O’Connor, F. M.</em> (2023). The air pollution human health burden in different future scenarios that involve the mitigation of near-term climate fForcers, climate and land-use. GeoHealth, 7, e2023GH000812. doi: <a href="https://doi.org/10.1029/2023GH000812" target="_new">10.1029/2023GH000812</a></p>
+              <p><em>Reddington, C. L., Turnock, S. T., Conibear, L., Forster, P. M., Lowe, J. A., Ford, L. B., et al.</em> (2023). Inequalities in air pollution exposure and attributable mortality in a low carbon future. Earth's Future, 11, e2023EF003697. doi: <a href="https://doi.org/10.1029/2023EF003697" target="_new">10.1029/2023EF003697</a></p>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+      <!-- footer: ________________________________________________________ -->
+      <div id="footer"
+           class="footer row_wrap flex_center flex_no_grow">
+        <div id="footer_ssi_logo"
+             class="footer_item footer_item_hide">
+          <a href="https://software.ac.uk/"
+             target = "_new"><img class="footer_logo"
+                                  src="../img/logo/ssi_logo.png"></a>
+        </div>
+        <div id="footer_uoe_logo"
+             class="footer_item footer_item_hide">
+          <a href="https://www.ed.ac.uk/"
+             target="_new"><img class="footer_logo"
+                                src="../img/logo/uoe_logo.png"></a>
+        </div>
+        <div id="footer_uol_logo"
+             class="footer_item footer_item_hide">
+          <a href="https://leeds.ac.uk/"
+             target="_new"><img class="footer_logo"
+                                src="../img/logo/uol_logo.png"></a>
+        </div>
+        <div id="footer_mo_logo"
+             class="footer_item footer_item_hide">
+          <a href="https://metoffice.gov.uk/"
+             target="_new"><img class="footer_logo"
+                                src="../img/logo/mo_logo.png"></a>
+        </div>
+        <div id="footer_nc_logo"
+             class="footer_item footer_item_hide">
+          <a href="https://ncsu.edu/"
+             target="_new"><img class="footer_logo"
+                                src="../img/logo/nc_logo.png"></a>
+        </div>
+      </div>
+    <!-- container end: ___________________________________________________ -->
+    </div>
+  <!-- body end: __________________________________________________________ -->
+  </body>
+<!-- html end: ____________________________________________________________ -->
+</html>
