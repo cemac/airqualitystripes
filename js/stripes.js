@@ -33,7 +33,7 @@ var site_vars = {
   'data_dir': 'data/',
   'data_file': 'aq_data.json',
   /* plots directory: */
-  'plots_dir': 'https://gws-access.jasmin.ac.uk/public/aq_stripes',
+  'plots_dir': 'https://cemac.github.io/airqualitystripes-plots',
   /* countries and cities data: */
   'countries': null,
   'cities': null,
