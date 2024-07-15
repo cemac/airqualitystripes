@@ -44,8 +44,6 @@ var site_vars = {
   /* country and city for which data is loaded: */
   'data_country': null,
   'data_city': null,
-  /* selected plot: */
-  'plot_index': null
 };
 
 /* functions */
@@ -72,6 +70,30 @@ function get_get_vars() {
  return get_vars;
 };
 
+/* functions to set and retrieve cookis. borrowed from 23 schools: */
+function set_cookie(cookie_name, cookie_value, expire_days) {
+  const d = new Date();
+  d.setTime(d.getTime() + (expire_days * 24 * 60 * 60 * 1000));
+  let expires = 'expires='+ d.toUTCString();
+  document.cookie = cookie_name + '=' + cookie_value + ';' + expires +
+                    ';path=/';
+}
+function get_cookie(cookie_name) {
+  let name = cookie_name + '=';
+  let decoded_cookie = decodeURIComponent(document.cookie);
+  let ca = decoded_cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return '';
+}
+
 /* update plot selection icons: */
 function update_plot_selects() {
   /* get plot information for selected city: */
@@ -79,7 +101,7 @@ function update_plot_selects() {
   var plots = city_data['plots'];
   var plots_count = plots.length;
   /* get selected plot index: */
-  var plot_index = site_vars['plot_index'];
+  var plot_index = parseInt(get_cookie('plot_index'));
   /* plot selection element: */
   var content_plot_select = site_vars['el_content_plot_select'];
   /* clear out html: */
@@ -202,10 +224,10 @@ function update_city() {
   site_vars['city'] = city;
   site_vars['city_data'] = site_vars['cities'][country][city];
   /* check for stored plot index, else set to 0: */
-  var plot_index = site_vars['plot_index'];
-  if ((plot_index == null) || (plot_index == undefined)) {
+  var plot_index = parseInt(get_cookie('plot_index'));
+  if (isNaN(plot_index)) {
     plot_index = 0;
-    site_vars['plot_index'] = plot_index;
+    set_cookie('plot_index', plot_index, 1 / 24);
   };
   /* update plot select icons: */
   update_plot_selects();
@@ -300,7 +322,7 @@ function display_plots() {
   var plots = city_data['plots'];
   var plots_count = plots.length;
   /* display selected plot index: */
-  var plot_index = site_vars['plot_index'];
+  var plot_index = parseInt(get_cookie('plot_index'));
   var plot_el = site_vars['el_content_plot_img'];
   plot_el.src = plots_dir + '/' + plots[plot_index];
   /* update page title: */
@@ -322,7 +344,7 @@ function update_plot(plot_index) {
     return;
   };
   /* store plot index: */
-  site_vars['plot_index'] = plot_index;
+  set_cookie('plot_index', plot_index, 1 / 24);
   /* update plots: */
   display_plots();
   /* update plot selection icons: */
