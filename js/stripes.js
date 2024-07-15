@@ -41,6 +41,9 @@ var site_vars = {
   /* selected country and city: */
   'country': null,
   'city': null,
+  /* country and city for which data is loaded: */
+  'data_country': null,
+  'data_city': null,
   /* selected plot: */
   'plot_index': null
 };
@@ -157,10 +160,9 @@ function update_city() {
       (cities.indexOf(get_city) > -1)) {
     city = get_city;
     get_city = true;
+  } else {
+    site_vars['get_vars']['city'] = null;
   };
-  /* wipe out get vars: */
-  site_vars['get_vars']['country'] = undefined;
-  site_vars['get_vars']['city'] = undefined;
   /* if stored city is defined the same as selected, return: */
   if ((city != null) && (city != undefined) &&
       (city == city_selected)) {
@@ -174,6 +176,16 @@ function update_city() {
     /* invalid city, pick one at random: */
     var city_index = Math.floor(Math.random() * cities.length);
     city = cities[city_index];
+  };
+  /* redirect if url does not include get variables: */
+  if ((site_vars['get_vars']['country'] == null) ||
+      (site_vars['get_vars']['country'] == undefined) ||
+      (site_vars['get_vars']['city'] == null) ||
+      (site_vars['get_vars']['city'] == undefined) ||
+      (site_vars['data_country'] != null) &&
+      (site_vars['data_country'] != undefined) &&
+      (site_vars['data_country'] != country)) {
+    window.location.replace('/?country=' + country + '&city=' + city);
   };
   /* add city select html: */
   var my_html = '';
@@ -199,6 +211,12 @@ function update_city() {
   update_plot_selects();
   /* update plots: */
   display_plots();
+  /* store country and city for which data is loaded: */
+  site_vars['data_country'] = country;
+  site_vars['data_country'] = city;
+  /* wipe out get vars: */
+  site_vars['get_vars']['country'] = undefined;
+  site_vars['get_vars']['city'] = undefined;
 };
 
 /* update country information: */
@@ -222,6 +240,8 @@ function update_country() {
       (countries.indexOf(get_country) > -1)) {
     country = get_country;
     get_country = true;
+  } else {
+    site_vars['get_vars']['country'] = null;
   };
   /* if stored country is defined and the same as selected, return: */
   if ((country != null) && (country != undefined) &&
