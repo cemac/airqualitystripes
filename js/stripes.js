@@ -10,6 +10,7 @@ var site_vars = {
   'el_content_control_close': document.getElementById('content_control_close_click'),
   'el_content_control_menu_img': document.getElementById('content_control_menu_img'),
   /* select elements: */
+  'continent_sel': document.getElementById('plot_control_continent'),
   'country_sel': document.getElementById('plot_control_country'),
   'city_sel': document.getElementById('plot_control_city'),
   /* plot selection element: */
@@ -33,17 +34,25 @@ var site_vars = {
   'data_dir': 'data/',
   'data_file': 'aq_data.json',
   /* plots directory: */
-  'plots_dir': 'https://cemac.github.io/airqualitystripes-plots',
-  /* countries and cities data: */
+///  'plots_dir': 'https://cemac.github.io/airqualitystripes-plots',
+  'plots_dir': 'plots',
+  /* continents, countries and cities data: */
+  'continents': null,
   'countries': null,
+  'all_countries': null,
   'cities': null,
+  'all_cities': null,
   'city_data': null,
-  /* selected country and city: */
+  /* selected continent, country and city: */
+  'continent': null,
   'country': null,
   'city': null,
-  /* country and city for which data is loaded: */
+  /* continent, country and city for which data is loaded: */
+  'data_continent': null,
   'data_country': null,
   'data_city': null,
+  /* get variables: */
+  'get_vars': null
 };
 
 /* functions */
@@ -160,7 +169,8 @@ function update_plot_selects() {
 
 /* update city information: */
 function update_city() {
-  /* get country and city from site variables: */
+  /* get continent, country and city from site variables: */
+  var continent = site_vars['continent'];
   var country = site_vars['country'];
   var city = site_vars['city'];
   /* get cities for this country: */
@@ -200,14 +210,16 @@ function update_city() {
     city = cities[city_index];
   };
   /* redirect if url does not include get variables: */
-  if ((site_vars['get_vars']['country'] == null) ||
+  if ((site_vars['get_vars']['continent'] == null) ||
+      (site_vars['get_vars']['continent'] == undefined) ||
+      (site_vars['get_vars']['country'] == null) ||
       (site_vars['get_vars']['country'] == undefined) ||
       (site_vars['get_vars']['city'] == null) ||
       (site_vars['get_vars']['city'] == undefined) ||
       (site_vars['data_country'] != null) &&
       (site_vars['data_country'] != undefined) &&
       (site_vars['data_country'] != country)) {
-    window.location.replace('/?country=' + country + '&city=' + city);
+    window.location.replace('/?continent=' + continent + '&country=' + country + '&city=' + city);
   };
   /* add city select html: */
   var my_html = '';
@@ -233,20 +245,23 @@ function update_city() {
   update_plot_selects();
   /* update plots: */
   display_plots();
-  /* store country and city for which data is loaded: */
+  /* store continent, country and city for which data is loaded: */
+  site_vars['data_continent'] = continent;
   site_vars['data_country'] = country;
   site_vars['data_country'] = city;
   /* wipe out get vars: */
+  site_vars['get_vars']['continent'] = undefined;
   site_vars['get_vars']['country'] = undefined;
   site_vars['get_vars']['city'] = undefined;
 };
 
 /* update country information: */
 function update_country() {
-  /* get country value from site variables: */
+  /* get continent and country value from site variables: */
+  var continent = site_vars['continent'];
   var country = site_vars['country'];
   /* get country data: */
-  var countries = site_vars['countries'];
+  var countries = site_vars['countries'][continent];
   countries.sort();
   /* get select elements: */
   var country_sel = site_vars['country_sel'];
@@ -298,11 +313,73 @@ function update_country() {
   update_city();
 };
 
+/* update continent information: */
+function update_continent() {
+  /* get continent value from site variables: */
+  var continent = site_vars['continent'];
+  /* get continent data: */
+  var continents = site_vars['continents'];
+  continents.sort();
+  /* get select elements: */
+  var continent_sel = site_vars['continent_sel'];
+  /* get selected continent, if possible: */
+  if (continent_sel.selectedIndex < 0) {
+    var continent_selected = undefined;
+  } else {
+    var continent_selected = continent_sel.options[continent_sel.selectedIndex].value;
+  };
+  /* check for continent in get variables: */
+  var get_continent = site_vars['get_vars']['continent'];
+  if ((get_continent != undefined) && (get_continent != null) &&
+      (continents.indexOf(get_continent) > -1)) {
+    continent = get_continent;
+    get_continent = true;
+  } else {
+    site_vars['get_vars']['continent'] = null;
+  };
+  /* if stored continent is defined and the same as selected, return: */
+  if ((continent != null) && (continent != undefined) &&
+      (continent == continent_selected)) {
+    return;
+  /* else, use selected value, unless we have a valid continent from get: */
+  } else if (get_continent != true) {
+    continent = continent_selected;
+  };
+  /* if continent is not recognised or defined ... : */
+  if ((continents.indexOf(continent) < 0) || (continent == null) ||
+      (continent == undefined)) {
+    /* invalid continent, pick one at random: */
+    var continent_index = Math.floor(Math.random() * continents.length);
+    continent = continents[continent_index];
+  };
+  /* add continent select html: */
+  var my_html = '';
+  for (var i = 0; i < continents.length; i++) {
+    var my_continent = continents[i];
+    my_html += '<option value="' + my_continent + '"';
+    if (my_continent == continent) {
+      my_html += ' selected';
+    };
+    my_html += '>' + my_continent + '</option>';
+  };
+  continent_sel.innerHTML = my_html;
+  /* store selected continent: */
+  site_vars['continent'] = continent;
+  /* update country information: */
+  site_vars['country'] = undefined;
+  update_country();
+};
+
 /* function to display plots */
 function display_plots() {
-  /* get country and city from site variables: */
+  /* get continent, country and city from site variables: */
+  var continent = site_vars['continent'];
   var country = site_vars['country'];
   var city = site_vars['city'];
+  /* if continent is not defined, update: */
+  if ((continent == null) || (continent == undefined)) {
+     update_continent();
+  };
   /* if country is not defined, update: */
   if ((country == null) || (country == undefined)) {
      update_country();
@@ -311,11 +388,10 @@ function display_plots() {
   if ((city == null) || (city == undefined)) {
      update_city();
   };
-  /* re-get country and city from site variables: */
+  /* re-get continent, country and city from site variables: */
+  continent = site_vars['continent'];
   country = site_vars['country'];
   city = site_vars['city'];
-  /* log message: */
-  console.log('selected country: ' + country + ', selected city: ' + city);
   /* get plot data for this city: */
   var city_data = site_vars['city_data'];
   var plots_dir = site_vars['plots_dir'] + '/' +  city_data['plots_dir'];
@@ -363,8 +439,11 @@ async function load_data() {
     if (data_req.status == 200) {
       /* store json information from request: */
       var aq_data = await data_req.json();
+      site_vars['continents'] = aq_data['continents'];
       site_vars['countries'] = aq_data['countries'];
+      site_vars['all_countries'] = aq_data['all_countries'];
       site_vars['cities'] = aq_data['cities'];
+      site_vars['all_cities'] = aq_data['all_cities'];
       /* display plots: */
       display_plots();
     } else {
@@ -425,5 +504,6 @@ window.addEventListener('load', function() {
 });
 
 /* select listeners: */
+site_vars['continent_sel'].addEventListener('change', update_continent);
 site_vars['country_sel'].addEventListener('change', update_country);
 site_vars['city_sel'].addEventListener('change', update_city);
