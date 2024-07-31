@@ -36,6 +36,8 @@ var site_vars = {
   /* plots directory: */
 ///  'plots_dir': 'https://cemac.github.io/airqualitystripes-plots',
   'plots_dir': 'plots',
+  /* plot names: */
+  'plot_names': ['stripes', 'line', 'bar', 'info'],
   /* continents, countries and cities data: */
   'continents': null,
   'countries': null,
@@ -43,16 +45,6 @@ var site_vars = {
   'cities': null,
   'all_cities': null,
   'city_data': null,
-  /* selected continent, country, city and plot: */
-  'continent_selected': null,
-  'country_selected': null,
-  'city_selected': null,
-  'plot_selected': null,
-  /* continent, country, city and plot for which data is loaded: */
-  'continent_loaded': null,
-  'country_loaded': null,
-  'city_loaded': null,
-  'plot_loaded': null,
   /* get variables: */
   'get_vars': null
 };
@@ -105,20 +97,98 @@ function get_cookie(cookie_name) {
   return '';
 }
 
+/* function to update plot by index: */
+function update_plot(plot_index) {
+  /* if no plot index, return: */
+  if ((plot_index == null) || (plot_index == undefined)) {
+    return;
+  };
+  /* check plot index is valid: */
+  var city_data = site_vars['city_data'];
+  var plots = city_data['plots'];
+  var plots_count = plots.length;
+  if ((plot_index < 0) || (plots_count <= plot_index)) {
+    return;
+  };
+  /* store plot index: */
+  set_cookie('plot_index', plot_index, 1 / 24);
+  /* update plots: */
+  update_location();
+};
 
-
-function display_plots() {};
-
-
-
-
+/* update plot selection icons: */
+function update_plot_selects() {
+  /* get plot information for selected city: */
+  var city_data = site_vars['city_data'];
+  var plots = city_data['plots'];
+  var plots_count = plots.length;
+  /* get selected plot index: */
+  var plot_index = parseInt(get_cookie('plot_index'));
+  /* plot selection element: */
+  var content_plot_select = site_vars['el_content_plot_select'];
+  /* clear out html: */
+  var content_plot_select_html = '';
+  /* for each available plot, add icon img: */
+  var img_plot_select = site_vars['img_plot_select'];
+  var img_plot_selected = site_vars['img_plot_selected'];
+  var img_bar_select = site_vars['img_bar_select'];
+  var img_bar_selected = site_vars['img_bar_selected'];
+  var img_info_select = site_vars['img_info_select'];
+  var img_info_selected = site_vars['img_info_selected'];
+  var img_line_select = site_vars['img_line_select'];
+  var img_line_selected = site_vars['img_line_selected'];
+  var img_stripes_select = site_vars['img_stripes_select'];
+  var img_stripes_selected = site_vars['img_stripes_selected'];
+  for (var i = 0 ; i < plots_count ; i++) {
+    /* get plot name: */
+    var this_plot = plots[i];
+    /* default plot icons: */
+    var img_select = img_plot_select;
+    var img_selected = img_plot_selected;
+    var img_title = '';
+    /* check for type and select appropriate icon: */
+    if (this_plot.indexOf('summary_statistics') > -1) {
+      var img_select = img_info_select;
+      var img_selected = img_info_selected;
+      var  img_title = 'Info';
+    } else if (this_plot.indexOf('absolute_bar') > -1) {
+      var img_select = img_bar_select;
+      var img_selected = img_bar_selected;
+      var  img_title = 'Bars';
+    } else if (this_plot.indexOf('aq_stripes_withline') > -1) {
+      var img_select = img_line_select;
+      var img_selected = img_line_selected;
+      var  img_title = 'Stripes with colour bar';
+    } else if (this_plot.indexOf('aq_stripes') > -1) {
+      var img_select = img_stripes_select;
+      var img_selected = img_stripes_selected;
+      var  img_title = 'Air pollution stripes';
+    };
+    /* check if this is selected plot: */
+    if (i == plot_index) {
+      content_plot_select_html += '<img src="' + img_selected +
+                                  '" class="img_plot_selected" ' +
+                                  'title="' + img_title + '">';
+    } else {
+      content_plot_select_html += '<img src="' + img_select +
+                                  '" class="img_plot_select" ' +
+                                  'onclick="update_plot(' + i + ')" ' +
+                                  'title="' + img_title + '">';
+    };
+  };
+  /* update html: */
+  content_plot_select.innerHTML = content_plot_select_html;
+};
 
 function update_location() {
   /* get values from get variables: */
   var get_continent = site_vars['get_vars']['continent'];
   var get_country = site_vars['get_vars']['country'];
   var get_city = site_vars['get_vars']['city'];
-  var get_plot = parseInt(site_vars['get_vars']['plot']);
+  var get_plot = site_vars['get_vars']['plot']
+  if (get_plot != undefined) {
+    get_plot = get_plot.toLowerCase();
+  };
   /* wipe out get variables: */
   site_vars['get_vars'] = {};
   /* get select elements: */
@@ -127,7 +197,7 @@ function update_location() {
   var city_sel = site_vars['city_sel'];
   /* init selected locations as null: */
   var sel_continent = null;
-  var sel_coountry = null;
+  var sel_country = null;
   var sel_city = null;
   /* init location values as null: */
   var continent = null;
@@ -164,9 +234,12 @@ function update_location() {
   };
   /* countries: */
   var countries = site_vars['countries'][continent];
-  if (country == null) {
+  if ((country == null) || (countries.indexOf(country) < 0)) {
     /* use selected country, if available, else pick random: */
-    if (country_sel.selectedIndex > -1) {
+    if ((country_sel.selectedIndex > -1) &&
+        (countries.indexOf(
+           country_sel.options[country_sel.selectedIndex].value
+         ) > -1)) {
       sel_country = country_sel.options[country_sel.selectedIndex].value;
       continent = site_vars['all_countries'][sel_country]['continent'];
       country = sel_country;
@@ -180,9 +253,12 @@ function update_location() {
   for (var i in site_vars['cities'][country]) {
     cities.push(i);
   };
-  if (city == null) {
+  if ((city == null) || (cities.indexOf(city) < 0)) {
     /* use selected city, if available, else pick random: */
-    if (city_sel.selectedIndex > -1) {
+    if ((city_sel.selectedIndex > -1) &&
+        (cities.indexOf(
+           city_sel.options[city_sel.selectedIndex].value
+         ) > -1)) {
       sel_city = city_sel.options[city_sel.selectedIndex].value;
       continent = site_vars['all_cities'][sel_city]['continent'];
       country = site_vars['all_cities'][sel_city]['country'];
@@ -232,41 +308,33 @@ function update_location() {
   var plots = city_data['plots'];
   /* check for get plot index ... default to 0: */
   var plot_index = 0;
-  if (plots[get_plot] != undefined) {
-    plot_index = get_plot;
+  /* map plot names to indexes: */
+  var plot_get_index = site_vars['plot_names'].indexOf(get_plot);
+  if (plot_get_index > -1) {
+    plot_index = plot_get_index;
   } else if (plots[parseInt(get_cookie('plot_index'))] != undefined) {
     plot_index = parseInt(get_cookie('plot_index'));
-  }; 
+  };
+  var plot = site_vars['plot_names'][plot_index];
   /* store plot index: */
   set_cookie('plot_index', plot_index, 1 / 24);
-
-
-
-
-///  /* display selected plot index: */
-///  var plot_index = parseInt(get_cookie('plot_index'));
-///  var plot_el = site_vars['el_content_plot_img'];
-///  plot_el.src = plots_dir + '/' + plots[plot_index];
-///  /* update page title: */
-///  var page_title = site_vars['page_title'];
-///  document.title = page_title + ' - ' + city + ', ' + country;
-
-
-
-  /* store selected continent, country, city and plot: */
-  site_vars['continent_selected'] = continent;
-  site_vars['country_selected'] = country;
-  site_vars['city_selected'] = city;
-  site_vars['plot_selected'] = get_plot;
-
-
-
-
-
-  /* store continent, country and city for which data is loaded: */
-  site_vars['data_continent'] = continent;
-  site_vars['data_country'] = country;
-  site_vars['data_country'] = city;
+  /* make sure url contains all parameters: */
+  if ((get_continent != continent) ||
+      (get_country != country) ||
+      (get_city != city) ||
+      (get_plot != plot)) {
+    window.location.replace('/?continent=' + continent + '&country=' + country +
+                            '&city=' + city + '&plot=' + plot);
+  };
+  /* update select elements: */
+  update_plot_selects();
+  /* display selected plot index: */
+  var plot_el = site_vars['el_content_plot_img'];
+  plot_el.src = plots_dir + '/' + plots[plot_index];
+  /* update page title: */
+  var page_title = site_vars['page_title'];
+  document.title = page_title + ' - ' + city + ', ' + country + ', ' +
+                   continent;
 };
 
 /* function to load site data: */
@@ -307,9 +375,6 @@ function content_control_toggle() {
   var control_basis = content_control.style.flexBasis;
   /* get stored controls_hidden value: */
   var controls_hidden = parseInt(get_cookie('controls_hidden'));
-
-  console.log('*', controls_hidden);
-
   /* if controls are not visible: */
   if ((control_basis == '0%') ||
       ((control_basis == '0%') && (controls_hidden == 10))) {
