@@ -34,8 +34,7 @@ var site_vars = {
   'data_dir': 'data/',
   'data_file': 'aq_data.json',
   /* plots directory: */
-///  'plots_dir': 'https://cemac.github.io/airqualitystripes-plots',
-  'plots_dir': 'plots',
+  'plots_dir': 'https://cemac.github.io/airqualitystripes-plots',
   /* plot names: */
   'plot_names': ['stripes', 'line', 'bar', 'info'],
   /* continents, countries and cities data: */
