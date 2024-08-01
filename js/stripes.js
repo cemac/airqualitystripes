@@ -371,13 +371,15 @@ function content_control_toggle() {
   var content_control_menu_img = site_vars['el_content_control_menu_img'];
   /* plot container element: */
   var content_plot = site_vars['el_content_plot'];
-  /* get control flex basis value: */
+  /* get control flex basis and display values: */
   var control_basis = content_control.style.flexBasis;
+  var control_display = content_control.style.display;
   /* get stored controls_hidden value: */
   var controls_hidden = parseInt(get_cookie('controls_hidden'));
   /* if controls are not visible: */
   if ((control_basis == '0%') ||
-      ((control_basis == '0%') && (controls_hidden == 10))) {
+      ((control_basis == '0%') && (controls_hidden == 10)) ||
+      ((control_display == '') && (controls_hidden == 10))) {
     /* show the controls: */
     content_control_menu_img.style.width = '0em';
     content_control.style.marginRight = '0.5em';
@@ -385,6 +387,7 @@ function content_control_toggle() {
     content_plot.style.flexBasis = '80%';
     content_control.style.flexBasis = '20%';
     content_control_close.style.color = '';
+    content_control.style.display = 'inline';
     set_cookie('controls_hidden', 0, 1 / 24);
   } else if (controls_hidden != 10) {
     /* hide the controls: */
@@ -394,6 +397,7 @@ function content_control_toggle() {
     content_control.style.minWidth = '0em';
     content_control.style.marginRight = '0em';
     content_control_menu_img.style.width = '1.5em';
+    content_control.style.display = 'none';
     set_cookie('controls_hidden', 1, 1 / 24);
   };
   /* reset stored value, if required: */
