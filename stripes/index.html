@@ -11,14 +11,14 @@
           href="../img/icon/icon.png"
           sizes="192x192">
     <!-- title: ___________________________________________________________ -->
-    <title>AQ stripes - Contact</title>
+    <title>AQ stripes</title>
     <!-- styles: __________________________________________________________ -->
     <link rel="stylesheet"
           type="text/css"
           href="../css/site.css"
           media="all">
     <!-- scripts: _________________________________________________________ -->
-    <script src="../js/site.js"
+    <script src="../js/stripes.js"
             charset="utf-8"
             defer>
     </script>
@@ -58,7 +58,31 @@
           <div id="stripes_control"
                class="control_section">
             <p id="stripes_control_header"
-                class="control_header"><a href="../stripes/">Stripes</a></p>
+                class="control_header_active">Stripes</p>
+          </div>
+          <div class="plot_control">
+            <p>
+              <label class="plot_control_label">Continent</label>
+            </p>
+            <select id="plot_control_continent"
+                    class="plot_control_select">
+            </select>
+          </div>
+          <div class="plot_control">
+            <p>
+              <label class="plot_control_label">Country</label>
+            </p>
+            <select id="plot_control_country"
+                    class="plot_control_select">
+            </select>
+          </div>
+          <div class="plot_control">
+            <p>
+              <label class="plot_control_label">City</label>
+            </p>
+            <select id="plot_control_city"
+                    class="plot_control_select">
+            </select>
           </div>
           <div id="faq_control"
                class="control_section">
@@ -78,12 +102,12 @@
           <div id="ack_control"
                class="control_section">
             <p id="ack_control_header"
-                class="control_header_active">Acknowledgements</p>
+                class="control_header"><a href="../acknowledgements/">Acknowledgements</a></p>
           </div>
         </div>
-        <!-- dashboard: ___________________________________________________ -->
-        <div id="content_content"
-             class="content_content column">
+        <!-- plots: _______________________________________________________ -->
+        <div id="content_plot"
+             class="content_plot column">
           <div id="content_control_menu"
              class="content_control_menu row flex_start">
             <img id="content_control_menu_img"
@@ -91,19 +115,14 @@
                  src="../img/control/menu.png"
                   onclick="content_control_toggle()">
           </div>
-          <div id="content_container"
-               class="content_text_container column flex_start">
-            <h3>Acknowledgements</h3>
-            <div>
-              <p>The project is a collaboration between the University of Edinburgh (EPCC), the University of Leeds (School of Earth and Environment), the UK Met Office and North Carolina State University.</p>
-              <p>These images were produced by: Kirsty Pringle, Jim McQuaid, Richard Rigby, Steve Turnock, Carly Reddington, Meruyert Sha, Malcolm Illingworth, Denis Barclay, Douglas Hamilton and Ethan Brain.</p>
-              <p>We are grateful for the support provided by the <a href="https://www.software.ac.uk/" target="_new">Software Sustainability Institute</a> and <a href="https://www.epcc.ed.ac.uk/" target="_new">EPCC</a> and volunteer effort provided through <a href="https://accesstoindustry.co.uk/" target="_new">Access to Industry (Access to Data)</a>.</p>
-              <p>Many thanks to Ed Hawkins for advice and guidance, and for the original stripes!  Thanks also to Alex Pringle for his geographical expertise and to the many colleagues who have contributed ideas and opinions to improve these images.</p>
-              <p>This work used JASMIN, the UK’s collaborative data analysis environment (<a href="https://www.jasmin.ac.uk" target="_new">https://www.jasmin.ac.uk</a>)</p>
-              <p>Lawrence, B. N. , Bennett, V. L., Churchill, J., Juckes, M., Kershaw, P., Pascoe, S., Pepler, S., Pritchard, M. and Stephens, A. (2013) Storing and manipulating environmental big data with JASMIN. In: IEEE Big Data, October 6-9, 2013, San Francisco.</p>
-              <p>The Software Sustainability Institute is funded through UKRI grant EP/S021779/1 (Phase 3) and AH/Z000114/1 (Phase 4).</p>
-              <p>The University of Edinburgh and the University of Leeds are both members of the Met Office Academic Parnership (<a href="https://www.metoffice.gov.uk/research/approach/collaboration/met-office-academic-partnerships" target="_new">MOAP</a>)</p>
-            </div>
+          <div id="content_plot_select"
+               class="content_plot_select row flex_center">
+          </div>
+          <div id="content_plot_img_container"
+               class="content_plot_img_container row flex_start">
+            <img id="content_plot_img"
+                 class="content_plot_img flex_no_grow"
+                 src="">
           </div>
         </div>
       </div>

@@ -16,22 +16,22 @@ var site_vars = {
   /* plot selection element: */
   'el_content_plot_select': document.getElementById('content_plot_select'),
   /* plot selection images: */
-  'img_plot_select': 'img/control/select.png',
-  'img_plot_selected': 'img/control/selected.png',
-  'img_bar_select': 'img/control/bar_select.png',
-  'img_bar_selected': 'img/control/bar_selected.png',
-  'img_info_select': 'img/control/info_select.png',
-  'img_info_selected': 'img/control/info_selected.png',
-  'img_line_select': 'img/control/line_select.png',
-  'img_line_selected': 'img/control/line_selected.png',
-  'img_stripes_select': 'img/control/stripes_select.png',
-  'img_stripes_selected': 'img/control/stripes_selected.png',
+  'img_plot_select': '../img/control/select.png',
+  'img_plot_selected': '../img/control/selected.png',
+  'img_bar_select': '../img/control/bar_select.png',
+  'img_bar_selected': '../img/control/bar_selected.png',
+  'img_info_select': '../img/control/info_select.png',
+  'img_info_selected': '../img/control/info_selected.png',
+  'img_line_select': '../img/control/line_select.png',
+  'img_line_selected': '../img/control/line_selected.png',
+  'img_stripes_select': '../img/control/stripes_select.png',
+  'img_stripes_selected': '../img/control/stripes_selected.png',
   /* plot container element: */
   'el_content_plot': document.getElementById('content_plot'),
   /* plot image element: */
   'el_content_plot_img': document.getElementById('content_plot_img'),
   /* data file to load: */
-  'data_dir': 'data/',
+  'data_dir': '../data/',
   'data_file': 'aq_data.json',
   /* plots directory: */
   'plots_dir': 'https://cemac.github.io/airqualitystripes-plots',
@@ -322,7 +322,8 @@ function update_location() {
       (get_country != country) ||
       (get_city != city) ||
       (get_plot != plot)) {
-    window.location.replace('/?continent=' + continent + '&country=' + country +
+    window.location.replace('/stripes/?continent=' + continent +
+                            '&country=' +country +
                             '&city=' + city + '&plot=' + plot);
   };
   /* update select elements: */

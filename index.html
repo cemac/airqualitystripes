@@ -8,17 +8,17 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1">
     <link rel="icon"
-          href="img/icon/icon.png"
+          href="./img/icon/icon.png"
           sizes="192x192">
     <!-- title: ___________________________________________________________ -->
     <title>AQ stripes</title>
     <!-- styles: __________________________________________________________ -->
     <link rel="stylesheet"
           type="text/css"
-          href="css/site.css"
+          href="./css/site.css"
           media="all">
     <!-- scripts: _________________________________________________________ -->
-    <script src="js/stripes.js"
+    <script src="./js/site.js"
             charset="utf-8"
             defer>
     </script>
@@ -53,71 +53,50 @@
           <div id="stripes_control"
                class="control_section">
             <p id="stripes_control_header"
-                class="control_header_active">Stripes</p>
+                class="control_header_active">Home</p>
           </div>
-          <div class="plot_control">
-            <p>
-              <label class="plot_control_label">Continent</label>
-            </p>
-            <select id="plot_control_continent"
-                    class="plot_control_select">
-            </select>
-          </div>
-          <div class="plot_control">
-            <p>
-              <label class="plot_control_label">Country</label>
-            </p>
-            <select id="plot_control_country"
-                    class="plot_control_select">
-            </select>
-          </div>
-          <div class="plot_control">
-            <p>
-              <label class="plot_control_label">City</label>
-            </p>
-            <select id="plot_control_city"
-                    class="plot_control_select">
-            </select>
+          <div id="stripes_control"
+               class="control_section">
+            <p id="stripes_control_header"
+                class="control_header"><a href="./stripes/">Stripes</a></p>
           </div>
           <div id="faq_control"
                class="control_section">
             <p id="faq_control_header"
-                class="control_header"><a href="faq/">FAQ</a></p>
+                class="control_header"><a href="./faq/">FAQ</a></p>
           </div>
           <div id="about_control"
                class="control_section">
             <p id="about_control_header"
-                class="control_header"><a href="about/">About the data</a></p>
+                class="control_header"><a href="./about/">About the data</a></p>
           </div>
           <div id="contact_control"
                class="control_section">
             <p id="contact_control_header"
-                class="control_header"><a href="contact/">Get in touch</a></p>
+                class="control_header"><a href="./contact">Get in touch</a></p>
           </div>
           <div id="ack_control"
                class="control_section">
             <p id="ack_control_header"
-                class="control_header"><a href="acknowledgements/">Acknowledgements</a></p>
+                class="control_header"><a href="./acknowledgements/">Acknowledgements</a></p>
           </div>
         </div>
-        <!-- plots: _______________________________________________________ -->
-        <div id="content_plot"
-             class="content_plot column">
+        <!-- dashboard: ___________________________________________________ -->
+        <div id="content_content"
+             class="content_content column">
           <div id="content_control_menu"
              class="content_control_menu row flex_start">
             <img id="content_control_menu_img"
                  class="content_control_menu_img"
-                 src="img/control/menu.png"
+                 src="./img/control/menu.png"
                   onclick="content_control_toggle()">
           </div>
-          <div id="content_plot_select"
-               class="content_plot_select row flex_center">
-          </div>
-          <div id="content_plot_img_container"
-               class="content_plot_img_container row flex_start">
-            <img id="content_plot_img"
-                 class="content_plot_img flex_no_grow"
-                 src="">
+          <div id="content_container"
+               class="content_text_container column flex_start">
+            <h3>Home</h3>
+            <div>
+              <p>...</p>
+            </div>
           </div>
         </div>
       </div>
@@ -128,31 +107,31 @@
              class="footer_item footer_item_hide">
           <a href="https://software.ac.uk/"
              target = "_new"><img class="footer_logo"
-                                  src="img/logo/ssi_logo.png"></a>
+                                  src="./img/logo/ssi_logo.png"></a>
         </div>
         <div id="footer_uoe_logo"
              class="footer_item footer_item_hide">
           <a href="https://www.ed.ac.uk/"
              target="_new"><img class="footer_logo"
-                                src="img/logo/uoe_logo.png"></a>
+                                src="./img/logo/uoe_logo.png"></a>
         </div>
         <div id="footer_uol_logo"
              class="footer_item footer_item_hide">
           <a href="https://leeds.ac.uk/"
              target="_new"><img class="footer_logo"
-                                src="img/logo/uol_logo.png"></a>
+                                src="./img/logo/uol_logo.png"></a>
         </div>
         <div id="footer_mo_logo"
              class="footer_item footer_item_hide">
           <a href="https://metoffice.gov.uk/"
              target="_new"><img class="footer_logo"
-                                src="img/logo/mo_logo.png"></a>
+                                src="./img/logo/mo_logo.png"></a>
         </div>
         <div id="footer_nc_logo"
              class="footer_item footer_item_hide">
           <a href="https://ncsu.edu/"
              target="_new"><img class="footer_logo"
-                                src="img/logo/nc_logo.png"></a>
+                                src="./img/logo/nc_logo.png"></a>
         </div>
       </div>
     <!-- container end: ___________________________________________________ -->
