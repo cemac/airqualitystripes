@@ -335,6 +335,24 @@ function update_location() {
   var page_title = site_vars['page_title'];
   document.title = page_title + ' - ' + city + ', ' + country + ', ' +
                    continent;
+  /* add twitter cards: */
+  var twit_title = document.createElement('meta');
+  twit_title.name = 'twitter:card';
+  twit_title.content = 'Air Quality Stripes, ' + city;
+  var twit_desc = document.createElement('meta');
+  twit_title.name = 'twitter:description';
+  twit_desc.content = 'Air quality ' + plot + ' plot for ' + city + ', ' + country;
+  var twit_img = document.createElement('meta');
+  twit_img.name = 'twitter:image';
+  twit_img.content = encodeURI(plots_dir + '/' + plots[plot_index]);
+  var twit_url = document.createElement('meta');
+  twit_url.name = 'twitter:url';
+  twit_url.content = encodeURI(location.href);
+  var page_head = document.getElementsByTagName("HEAD")[0];
+  page_head.appendChild(twit_title);
+  page_head.appendChild(twit_desc);
+  page_head.appendChild(twit_img);
+  page_head.appendChild(twit_url);
 };
 
 /* function to load site data: */
