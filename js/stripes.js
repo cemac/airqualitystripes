@@ -336,11 +336,14 @@ function update_location() {
   document.title = page_title + ' - ' + city + ', ' + country + ', ' +
                    continent;
   /* add twitter cards: */
+  var twit_card = document.createElement('meta');
+  twit_card.name = 'twitter:card';
+  twit_card.content = 'summary_large_image';
   var twit_title = document.createElement('meta');
-  twit_title.name = 'twitter:card';
+  twit_title.name = 'twitter:title';
   twit_title.content = 'Air Quality Stripes, ' + city;
   var twit_desc = document.createElement('meta');
-  twit_title.name = 'twitter:description';
+  twit_desc.name = 'twitter:description';
   twit_desc.content = 'Air quality ' + plot + ' plot for ' + city + ', ' + country;
   var twit_img = document.createElement('meta');
   twit_img.name = 'twitter:image';
@@ -349,6 +352,7 @@ function update_location() {
   twit_url.name = 'twitter:url';
   twit_url.content = encodeURI(location.href);
   var page_head = document.getElementsByTagName("HEAD")[0];
+  page_head.appendChild(twit_card);
   page_head.appendChild(twit_title);
   page_head.appendChild(twit_desc);
   page_head.appendChild(twit_img);
