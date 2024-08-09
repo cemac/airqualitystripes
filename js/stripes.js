@@ -375,7 +375,7 @@ function update_location() {
   /* update sharing links: */
   var twit_share = document.getElementById('twit_share');
   twit_share.href = 'https://twitter.com/intent/tweet?text=' +
-                    meta_desc_val +
+                    encodeURIComponent(meta_desc_val) +
                     '&url=' + encodeURIComponent(meta_url_val);
 };
 
