@@ -335,49 +335,42 @@ function update_location() {
   var page_title = site_vars['page_title'];
   document.title = page_title + ' - ' + city + ', ' + country + ', ' +
                    continent;
-  /* get head element: */
+  /* update meta tags ... get head element: */
   var page_head = document.getElementsByTagName("HEAD")[0];
-  /* add twitter meta tags: */
-  var twit_card = document.createElement('meta');
-  twit_card.name = 'twitter:card';
-  twit_card.content = 'summary_large_image';
-  var twit_title = document.createElement('meta');
-  twit_title.name = 'twitter:title';
-  twit_title.content = 'Air Quality Stripes, ' + city;
-  var twit_desc = document.createElement('meta');
-  twit_desc.name = 'twitter:description';
-  twit_desc.content = 'Air quality ' + plot + ' plot for ' + city + ', ' + country;
-  var twit_img = document.createElement('meta');
-  twit_img.name = 'twitter:image';
-  twit_img.content = encodeURI(plots_dir + '/' + plots[plot_index]);
+  /* set values for meta tags: */
+  var meta_title_val = 'Air Quality Stripes, ' + city;
+  var meta_desc_val = 'Air quality ' + plot + ' plot for ' +
+                      city + ', ' + country;
+  var meta_img_val = encodeURI(plots_dir + '/' + plots[plot_index]);
+  var meta_url_val = encodeURI(location.href);
+  /* meta tags: */
+  var meta_title = document.getElementById('meta_title');
+  meta_title.content = meta_title_val;
+  var meta_desc = document.getElementById('meta_desc');
+  meta_desc.content = meta_desc_val;
+  /* twitters tags: */
+  var twit_title = document.getElementById('twit_title');
+  twit_title.content = meta_title_val;
+  var twit_desc = document.getElementById('twit_desc');
+  twit_desc.content = meta_desc_val;
+  var twit_img = document.getElementById('twit_img');
+  twit_img.content = meta_img_val;
   var twit_url = document.createElement('meta');
+  twit_url.id = 'twit_url';
   twit_url.name = 'twitter:url';
-  twit_url.content = encodeURI(location.href);
-  page_head.appendChild(twit_card);
-  page_head.appendChild(twit_title);
-  page_head.appendChild(twit_desc);
-  page_head.appendChild(twit_img);
+  twit_url.content = meta_url_val;
   page_head.appendChild(twit_url);
-  /* add opengraph meta tags: */
-  var og_type = document.createElement('meta');
-  og_type.name = 'og:type';
-  og_type.content = 'website';
-  var og_title = document.createElement('meta');
-  og_title.name = 'og:title';
-  og_title.content = 'Air Quality Stripes, ' + city;
-  var og_desc = document.createElement('meta');
-  og_desc.name = 'og:description';
-  og_desc.content = 'Air quality ' + plot + ' plot for ' + city + ', ' + country;
-  var og_img = document.createElement('meta');
-  og_img.name = 'og:image';
-  og_img.content = encodeURI(plots_dir + '/' + plots[plot_index]);
+  /* opengraph tags: */
+  var og_title = document.getElementById('og_title');
+  og_title.content = meta_title_val;
+  var og_desc = document.getElementById('og_desc');
+  og_desc.content = meta_desc_val;
+  var og_img = document.getElementById('og_img');
+  og_img.content = meta_img_val;
   var og_url = document.createElement('meta');
+  og_url.id = 'og_url';
   og_url.name = 'og:url';
-  og_url.content = encodeURI(location.href);
-  page_head.appendChild(og_type);
-  page_head.appendChild(og_title);
-  page_head.appendChild(og_desc);
-  page_head.appendChild(og_img);
+  og_url.content = meta_url_val;
   page_head.appendChild(og_url);
 };
 
