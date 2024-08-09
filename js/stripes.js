@@ -4,7 +4,7 @@
 
 var site_vars = {
   /* base page title: */
-  'page_title': 'AQ stripes',
+  'page_title': 'Air Quality Stripes',
   /* control container elements: */
   'el_content_control': document.getElementById('content_control'),
   'el_content_control_close': document.getElementById('content_control_close_click'),
