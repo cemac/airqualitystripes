@@ -261,6 +261,21 @@ body {
   }
 }
 
+/** sharing links: **/
+
+.content_plot_share {
+  margin-left: 1em;
+}
+
+.content_plot_share_links {
+  margin-left: 5em;
+  margin-bottom: 1em;
+}
+
+.share_logo {
+  width: 2em;
+}
+
 /** text: **/
 
 .content_text_container {

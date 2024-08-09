@@ -372,6 +372,11 @@ function update_location() {
   og_url.name = 'og:url';
   og_url.content = meta_url_val;
   page_head.appendChild(og_url);
+  /* update sharing links: */
+  var twit_share = document.getElementById('twit_share');
+  twit_share.href = 'https://twitter.com/intent/tweet?text=' +
+                    meta_desc_val +
+                    '&url=' + encodeURIComponent(meta_url_val);
 };
 
 /* function to load site data: */
