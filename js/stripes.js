@@ -348,30 +348,6 @@ function update_location() {
   meta_title.content = meta_title_val;
   var meta_desc = document.getElementById('meta_desc');
   meta_desc.content = meta_desc_val;
-  /* twitters tags: */
-  var twit_title = document.getElementById('twit_title');
-  twit_title.content = meta_title_val;
-  var twit_desc = document.getElementById('twit_desc');
-  twit_desc.content = meta_desc_val;
-  var twit_img = document.getElementById('twit_img');
-  twit_img.content = meta_img_val;
-  var twit_url = document.createElement('meta');
-  twit_url.id = 'twit_url';
-  twit_url.name = 'twitter:url';
-  twit_url.content = meta_url_val;
-  page_head.appendChild(twit_url);
-  /* opengraph tags: */
-  var og_title = document.getElementById('og_title');
-  og_title.content = meta_title_val;
-  var og_desc = document.getElementById('og_desc');
-  og_desc.content = meta_desc_val;
-  var og_img = document.getElementById('og_img');
-  og_img.content = meta_img_val;
-  var og_url = document.createElement('meta');
-  og_url.id = 'og_url';
-  og_url.name = 'og:url';
-  og_url.content = meta_url_val;
-  page_head.appendChild(og_url);
   /* update sharing links: */
   var twit_share = document.getElementById('twit_share');
   twit_share.href = 'https://twitter.com/intent/tweet?text=' +
