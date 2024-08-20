@@ -353,6 +353,22 @@ function update_location() {
   twit_share.href = 'https://twitter.com/intent/tweet?text=' +
                     encodeURIComponent(meta_desc_val) +
                     '&url=' + encodeURIComponent(meta_url_val);
+  var fb_share = document.getElementById('fb_share');
+  fb_share.href = 'https://www.facebook.com/sharer/sharer.php?quote=' +
+                    encodeURIComponent(meta_desc_val) +
+                    '&u=' + encodeURIComponent(meta_url_val);
+  var wa_share = document.getElementById('wa_share');
+  wa_share.href = 'https://wa.me/?text=' +
+                    encodeURIComponent(meta_desc_val) +
+                    ': ' + encodeURIComponent(meta_url_val);
+  var li_share = document.getElementById('li_share');
+  li_share.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' +
+                    encodeURIComponent(meta_url_val);
+
+  var mail_share = document.getElementById('mail_share');
+  mail_share.href = 'mailto:?subject=' +
+                    encodeURIComponent(meta_desc_val) +
+                    '&body=' + encodeURIComponent(meta_url_val);
 };
 
 /* function to load site data: */
