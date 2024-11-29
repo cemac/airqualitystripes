@@ -364,7 +364,7 @@ function update_location() {
   var bsky_share = document.getElementById('bsky_share');
   bsky_share.href = 'https://bsky.app/intent/compose?text=' +
                     encodeURIComponent(meta_desc_val) +
-                    '&url=' + encodeURIComponent(meta_url_val);
+                    ': ' + encodeURIComponent(meta_url_val);
   var threads_share = document.getElementById('threads_share');
   threads_share.href = 'https://www.threads.net/intent/post?text=' +
                     encodeURIComponent(meta_desc_val) +
