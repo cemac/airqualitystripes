@@ -361,10 +361,17 @@ function update_location() {
   wa_share.href = 'https://wa.me/?text=' +
                     encodeURIComponent(meta_desc_val) +
                     ': ' + encodeURIComponent(meta_url_val);
+  var bsky_share = document.getElementById('bsky_share');
+  bsky_share.href = 'https://bsky.app/intent/compose?text=' +
+                    encodeURIComponent(meta_desc_val) +
+                    '&url=' + encodeURIComponent(meta_url_val);
+  var threads_share = document.getElementById('threads_share');
+  threads_share.href = 'https://www.threads.net/intent/post?text=' +
+                    encodeURIComponent(meta_desc_val) +
+                    '&url=' + encodeURIComponent(meta_url_val);
   var li_share = document.getElementById('li_share');
   li_share.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' +
                     encodeURIComponent(meta_url_val);
-
   var mail_share = document.getElementById('mail_share');
   mail_share.href = 'mailto:?subject=' +
                     encodeURIComponent(meta_desc_val) +
