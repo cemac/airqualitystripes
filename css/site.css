@@ -57,6 +57,12 @@ body {
   font-family: sans-serif, "Arial", "Helvetica";
 }
 
+/** headers: **/
+
+h4 a {
+  text-decoration: none;
+}
+
 /** main container: **/
 
 .container {
@@ -279,6 +285,19 @@ body {
 .share_logo {
   width: 2em;
   margin-left: 1em;
+}
+
+
+/** press: **/
+
+.content_press_img_container {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.content_press_img {
+  flex-basis: 79%;
+  max-width: 80%;
 }
 
 /** text: **/
