@@ -328,6 +328,18 @@ td {
   max-width: 80%;
 }
 
+/** chronicles: **/
+
+.content_chronicles_img_container {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.content_chronicles_img {
+  flex-basis: 79%;
+  max-width: 85%;
+}
+
 /** text: **/
 
 .content_text_container {
